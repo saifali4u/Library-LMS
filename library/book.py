@@ -15,7 +15,7 @@ class Book:
         return (
             f"ID: {self.id} "
             f"Title: {self.title} "
-            f"Author: {self.year} "
+            f"Author: {self.author} "
             f"Year{self.year} "
             f"Available: {'Yes' if self.available else 'No'} "
          )
@@ -30,7 +30,22 @@ class Book:
             "Available": self.available
         }
 
+    @classmethod
+    def from_dict(cls, data):
+        """Create a Book instance from a dictionary"""
+        return cls(
+            title = data["Title"],
+            author = data["Author"],
+            year =  data["Year"],
+            available = data["Available"]
+        )
 
 if __name__ == "__main__":
+    #create a book instance and then into dictioanry
     b1 = Book("Python", "Saif", "2000",)
     print(b1)
+    print(b1.to_dict())
+    #create new book instance form the dictioanry
+    book_dict = b1.to_dict()
+    b2 = Book.from_dict(book_dict)
+    print(b2)
